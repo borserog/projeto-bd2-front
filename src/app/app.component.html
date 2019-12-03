@@ -1,0 +1,10 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<ng-container *ngIf="data$ | async as data; else carregando">
+  <p *ngFor="let datum of data">
+    {{ datum | json }}
+  </p>
+</ng-container>
+
+<ng-template #carregando>
+  Carregando
+</ng-template>
