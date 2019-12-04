@@ -16,7 +16,11 @@ export class BntService {
     private http: HttpClient
   ) { }
 
-  getData(table: string) {
+  getTable(table: string) {
     return this.http.get(this.URL + table);
+  }
+
+  getTransfers(renavam: string) {
+    return this.http.post(this.URL + 'rpc/historico_renavam', { rena : renavam });
   }
 }

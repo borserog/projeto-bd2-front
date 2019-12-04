@@ -10,7 +10,49 @@ import {Observable} from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  data$: any;
+
+  veiculoProprietario;
+  veiculoProprietarioColunas = [
+    'renavam',
+    'placa',
+    'nomecondutor',
+    'denominacao',
+    'marca',
+    'cidade',
+    'estado',
+    'descricao'
+  ];
+
+  pontosCondutor;
+  pontosCondutorColunas = [
+    'anoinfracao',
+    'idcadastro',
+    'nome',
+    'idcategoriacnh',
+    'totalpontos'
+  ];
+
+  infracoesMultas;
+  infracoesMultasColunas = [
+    'mes',
+    'ano',
+    'qtdinfracoes',
+    'valorinfracoes'
+  ];
+
+  historico;
+  historicoColunas = [
+    'renavam',
+  'modelo',
+  'marca',
+  'ano',
+  'nome_prop',
+  'datacompra',
+  'datavenda',
+  ];
+
+
+
 
   constructor(
     private bntService: BntService
@@ -18,8 +60,28 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data$ = this.bntService.getData('veiculoproprietario').pipe(
-      map(x => x)
-    );
+    this.loadAll();
   }
+
+  pesquisar(renavam: string) {
+    this.bntService.getTransfers(renavam)
+      .subscribe(el => this.historico = el);
+  }
+
+
+  loadAll() {
+    this.bntService.getTable('veiculoproprietario')
+      .subscribe(el => this.veiculoProprietario = el);
+
+    this.bntService.getTable('pontoscondutor')
+      .subscribe(el => this.pontosCondutor = el);
+
+    this.bntService.getTable('infracoesmultas')
+      .subscribe(el => this.infracoesMultas = el);
+  }
+
+
+
+
+
 }

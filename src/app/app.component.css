@@ -1,0 +1,39 @@
+.main-card {
+  width: 80%;
+  margin: 1rem auto;
+}
+
+.mat-tab-labels {
+  background-color: #fff;
+}
+
+
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.btn {
+  display: block;
+}
+
+.form {
+  margin-bottom: 5rem;
+}
+
+table {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+h2 {
+  font-size: 3.6rem;
+  margin-bottom: 6rem;
+}
+
+th {
+  font-size: 1.8rem;
+}
+
+

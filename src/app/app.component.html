@@ -1,10 +1,204 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<ng-container *ngIf="data$ | async as data; else carregando">
-  <p *ngFor="let datum of data">
-    {{ datum | json }}
-  </p>
-</ng-container>
+  <mat-tab-group>
 
-<ng-template #carregando>
-  Carregando
-</ng-template>
+    <mat-tab label="Histórico">
+      <div class="wrapper"><h2>Histórico de Transações</h2>
+        <form class="form">
+          <mat-form-field>
+            <input matInput placeholder="Renavam" #input>
+          </mat-form-field>
+          <button type="button" class="btn" mat-flat-button color="primary" (click)="pesquisar(input.value)">Pesquisar</button>
+        </form>
+        <table mat-table [dataSource]="historico" class="mat-elevation-z8" *ngIf="historico">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="renavam">
+            <th mat-header-cell *matHeaderCellDef> Renavam</th>
+            <td style="font-weight: bold" mat-cell *matCellDef="let element"> {{element.renavam}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="modelo">
+            <th mat-header-cell *matHeaderCellDef> Modelo</th>
+            <td mat-cell *matCellDef="let element"> {{element.modelo}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef> Marca</th>
+            <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="ano">
+            <th mat-header-cell *matHeaderCellDef> Ano</th>
+            <td mat-cell *matCellDef="let element"> {{element.ano}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nome_prop">
+            <th mat-header-cell *matHeaderCellDef> Nome</th>
+            <td mat-cell *matCellDef="let element"> {{element.nome_prop}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="datacompra">
+            <th mat-header-cell *matHeaderCellDef> Data Compra</th>
+            <td mat-cell *matCellDef="let element"> {{element.datacompra}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="datavenda">
+            <th mat-header-cell *matHeaderCellDef> Data Venda</th>
+            <td mat-cell *matCellDef="let element"> {{element.datavenda}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="historicoColunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: historicoColunas;"></tr>
+        </table>
+      </div>
+
+    </mat-tab>
+
+    <mat-tab label="Visão 1">
+      <div class="wrapper"><h2><span style="font-weight: bold">Visão 1:</span> Pontos-Condutor</h2>
+
+        <table mat-table [dataSource]="pontosCondutor" class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="anoinfracao">
+            <th mat-header-cell *matHeaderCellDef> Ano</th>
+            <td style="font-weight: bold" mat-cell *matCellDef="let element"> {{element.anoinfracao}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="idcadastro">
+            <th mat-header-cell *matHeaderCellDef> No. Cadastro</th>
+            <td mat-cell *matCellDef="let element"> {{element.idcadastro}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome</th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="idcategoriacnh">
+            <th mat-header-cell *matHeaderCellDef> Categoria CNH</th>
+            <td mat-cell *matCellDef="let element"> {{element.idcategoriacnh}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalpontos">
+            <th mat-header-cell *matHeaderCellDef> Total Pts.</th>
+            <td mat-cell *matCellDef="let element"> {{element.totalpontos}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="pontosCondutorColunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: pontosCondutorColunas;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Visão 2">
+      <div class="wrapper"><h2><span style="font-weight: bold">Visão 2:</span> Veículo-Proprietário</h2>
+
+        <table mat-table [dataSource]="veiculoProprietario" class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="renavam">
+            <th mat-header-cell *matHeaderCellDef> Renavam</th>
+            <td style="font-weight: bold" mat-cell *matCellDef="let element"> {{element.renavam}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="placa">
+            <th mat-header-cell *matHeaderCellDef> Placa</th>
+            <td mat-cell *matCellDef="let element"> {{element.placa}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="nomecondutor">
+            <th mat-header-cell *matHeaderCellDef> Condutor</th>
+            <td mat-cell *matCellDef="let element"> {{element.nomecondutor}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="denominacao">
+            <th mat-header-cell *matHeaderCellDef> Denominação</th>
+            <td mat-cell *matCellDef="let element"> {{element.denominacao}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef> Marca</th>
+            <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cidade">
+            <th mat-header-cell *matHeaderCellDef> Cidade</th>
+            <td mat-cell *matCellDef="let element"> {{element.cidade}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado</th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição</th>
+            <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="veiculoProprietarioColunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: veiculoProprietarioColunas;"></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Visão 3">
+      <div class="wrapper"><h2><span style="font-weight: bold">Visão 3:</span> Infrações Multas</h2>
+
+        <table mat-table [dataSource]="infracoesMultas" class="mat-elevation-z8">
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="mes">
+            <th mat-header-cell *matHeaderCellDef> Mês</th>
+            <td style="font-weight: bold" mat-cell *matCellDef="let element"> {{element.mes}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="ano">
+            <th mat-header-cell *matHeaderCellDef> Ano</th>
+            <td mat-cell *matCellDef="let element"> {{element.ano}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="qtdinfracoes">
+            <th mat-header-cell *matHeaderCellDef> Qtd. Infrações</th>
+            <td mat-cell *matCellDef="let element"> {{element.qtdinfracoes}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="valorinfracoes">
+            <th mat-header-cell *matHeaderCellDef> Valor das Infrações</th>
+            <td mat-cell *matCellDef="let element"> R$ {{element.valorinfracoes}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="infracoesMultasColunas"></tr>
+          <tr mat-row *matRowDef="let row; columns: infracoesMultasColunas;"></tr>
+        </table>
+      </div>
+
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+
+<!--<ng-container *ngIf="data$ | async as data; else carregando">-->
+<!--  <p *ngFor="let datum of data">-->
+<!--    {{ datum | json }}-->
+<!--  </p>-->
+<!--</ng-container>-->
+
+<!--<ng-template #carregando>-->
+<!--  Carregando-->
+<!--</ng-template>-->

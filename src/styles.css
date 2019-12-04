@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  font-size: 62.5%;
+}
 
-html, body { height: 100%; }
+
+body {
+  height: 100%;
+  font-size: 1.6rem;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  background: url("/assets/triangle-mosaic.png");
+  color: #444444;
+}
+
+h2 {
+  font-weight: normal;
+  letter-spacing: .1rem;
+  text-shadow: 2px 3px 3px rgba(0,0,0,0.25);
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
